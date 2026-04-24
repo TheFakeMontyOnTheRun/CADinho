@@ -22,6 +22,12 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+            implementation(compose.components.resources) // For KMP resources
+            implementation("org.jetbrains.compose.components:components-resources:1.6.11") // Check for latest version
+
+            // If using Google's Material library directly:
+            implementation("androidx.compose.material:material-icons-extended:1.7.0")
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
