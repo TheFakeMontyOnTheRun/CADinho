@@ -1,9 +1,28 @@
 package pt.b13h.cadinho
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -234,9 +253,101 @@ fun Grid() {
 }
 
 @Composable
+fun ComboBoxForm() {
+    var text by remember { mutableStateOf("") }
+
+    val options = listOf("Option 1", "Option 2", "Option 3")
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        repeat(6) { index ->
+            ComboRow(
+                label = "Combo ${index + 1}",
+                options = options
+            )
+        }
+
+        OutlinedTextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("Input") },
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun ComboRow(
+    label: String,
+    options: List<String>
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var selected by remember { mutableStateOf(options.first()) }
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(modifier = Modifier.weight(1f)) {
+            OutlinedTextField(
+                value = selected,
+                onValueChange = {},
+                readOnly = true,
+                label = { Text(label) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = true }
+            )
+
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                options.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it) },
+                        onClick = {
+                            selected = it
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
+
+        Button(onClick = { /* TODO */ }) {
+            Text("OK")
+        }
+    }
+}
+
+
+@Composable
 @Preview
 fun App() {
     MaterialTheme {
-        Grid()
+        Row(modifier = Modifier.fillMaxSize()) {
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)   // grid takes remaining space
+                    .fillMaxHeight()
+            ) {
+                Grid()
+            }
+
+            Box(
+                modifier = Modifier
+                    .width(300.dp) // fixed control panel width
+                    .fillMaxHeight()
+            ) {
+                ComboBoxForm()
+            }
+        }
     }
 }
