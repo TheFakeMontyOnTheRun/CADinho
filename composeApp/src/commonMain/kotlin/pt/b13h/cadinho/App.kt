@@ -1,5 +1,6 @@
 package pt.b13h.cadinho
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +17,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -254,8 +256,6 @@ fun Grid() {
 
 @Composable
 fun ComboBoxForm() {
-    var text by remember { mutableStateOf("") }
-
     val options = listOf("Option 1", "Option 2", "Option 3")
 
     Column(
@@ -270,13 +270,6 @@ fun ComboBoxForm() {
                 options = options
             )
         }
-
-        OutlinedTextField(
-            value = text,
-            onValueChange = { text = it },
-            label = { Text("Input") },
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
@@ -294,16 +287,28 @@ fun ComboRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier.weight(1f)) {
-            OutlinedTextField(
-                value = selected,
-                onValueChange = {},
-                readOnly = true,
-                label = { Text(label) },
+            Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { expanded = true }
-            )
+                    .clickable { expanded = true },
+                tonalElevation = 2.dp,
+                shape = MaterialTheme.shapes.small,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = selected)
 
+                    Text(
+                        text = "▼",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
@@ -325,7 +330,6 @@ fun ComboRow(
         }
     }
 }
-
 
 @Composable
 @Preview
