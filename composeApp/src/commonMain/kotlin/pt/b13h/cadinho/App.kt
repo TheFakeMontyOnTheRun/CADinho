@@ -143,7 +143,7 @@ fun Grid() {
                         ),
                         end = Offset(
                             x = (-(cy + 1) * 10 + (cx * 10) + canvasWidth / 2).toFloat(),
-                            y = ((cx + 1) * 5 + cy * 5  + canvasHeight / 4).toFloat()
+                            y = ((cx + 1) * 5 + cy * 5 + canvasHeight / 4).toFloat()
                         ),
                         strokeWidth = 1.dp.toPx(), // Convert DP to Pixels
                         cap = StrokeCap.Round
@@ -160,7 +160,7 @@ fun Grid() {
                         ),
                         end = Offset(
                             x = (-(cy + 1) * 10 + (cx - 1) * 10 + canvasWidth / 2).toFloat(),
-                            y = ((cx + 1) * 5 + (cy + 1) * 5  + canvasHeight / 4).toFloat()
+                            y = ((cx + 1) * 5 + (cy + 1) * 5 + canvasHeight / 4).toFloat()
                         ),
                         strokeWidth = 1.dp.toPx(), // Convert DP to Pixels
                         cap = StrokeCap.Round
@@ -174,7 +174,7 @@ fun Grid() {
                         ),
                         end = Offset(
                             x = (-(cy + 1) * 10 + (cx + 1) * 10 + canvasWidth / 2).toFloat(),
-                            y = ((cx + 1) * 5 + (cy + 1) * 5  + canvasHeight / 4).toFloat()
+                            y = ((cx + 1) * 5 + (cy + 1) * 5 + canvasHeight / 4).toFloat()
                         ),
                         strokeWidth = 1.dp.toPx(), // Convert DP to Pixels
                         cap = StrokeCap.Round
@@ -190,7 +190,7 @@ fun Grid() {
                         ),
                         end = Offset(
                             x = (-(cy + 1) * 10 + (cx) * 10 + canvasWidth / 2).toFloat(),
-                            y = ((cx + 1) * 5 + (cy + 2) * 5  + canvasHeight / 4).toFloat()
+                            y = ((cx + 1) * 5 + (cy + 2) * 5 + canvasHeight / 4).toFloat()
                         ),
                         strokeWidth = 1.dp.toPx(), // Convert DP to Pixels
                         cap = StrokeCap.Round
@@ -223,7 +223,7 @@ fun Grid() {
                         ),
                         end = Offset(
                             x = (-(cy + 1) * 10 + (cx) * 10 + canvasWidth / 2).toFloat(),
-                            y = ((cx + 1) * 5 + (cy + 2) * 5  + canvasHeight / 4).toFloat()
+                            y = ((cx + 1) * 5 + (cy + 2) * 5 + canvasHeight / 4).toFloat()
                         ),
                         strokeWidth = 1.dp.toPx(), // Convert DP to Pixels
                         cap = StrokeCap.Round
