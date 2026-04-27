@@ -345,10 +345,12 @@ fun App() {
                 Grid()
             }
 
-            Box(
+            Surface(
                 modifier = Modifier
-                    .width(300.dp) // fixed control panel width
-                    .fillMaxHeight()
+                    .width(320.dp)
+                    .fillMaxHeight(),
+                tonalElevation = 6.dp,
+                shadowElevation = 8.dp
             ) {
                 ComboBoxForm()
             }
