@@ -237,19 +237,21 @@ fun Grid() {
 }
 
 @Composable
-fun ComboBoxForm() {
-    val options = listOf("Option 1", "Option 2", "Option 3")
-
+fun ComboBoxForm(
+    options: List<List<String>>,
+    onAdd: (Int) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        repeat(6) { index ->
+        options.forEachIndexed { index, opts ->
             ComboRow(
                 label = "Combo ${index + 1}",
-                options = options
+                options = opts,
+                onAdd = { onAdd(index) }
             )
         }
     }
@@ -258,7 +260,8 @@ fun ComboBoxForm() {
 @Composable
 fun ComboRow(
     label: String,
-    options: List<String>
+    options: List<String>,
+    onAdd: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selected by remember { mutableStateOf(options.first()) }
@@ -307,7 +310,7 @@ fun ComboRow(
             }
         }
 
-        Button(onClick = { /* TODO */ }) {
+        Button(onClick = { onAdd() }) {
             Text("OK")
         }
     }
@@ -316,6 +319,9 @@ fun ComboRow(
 @Composable
 @Preview
 fun App() {
+
+    val gridState = remember { GridState() }
+
     MaterialTheme {
         Row(
             modifier = Modifier
@@ -328,7 +334,7 @@ fun App() {
                     .weight(1f)
                     .fillMaxHeight()
             ) {
-                Grid()
+                Grid(/*config = gridState.options*/)
             }
 
             Surface(
@@ -337,7 +343,10 @@ fun App() {
                     .fillMaxHeight(),
                 tonalElevation = 6.dp
             ) {
-                ComboBoxForm()
+                ComboBoxForm(
+                    options = gridState.options,
+                    onAdd = { index -> gridState.addOption(index) }
+                )
             }
         }
     }
